@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guide d'utilisation — SOS Fuite d'Eau</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #2a3963;
+      --green: #b0ca60;
+      --green-dark: #94ae44;
+      --white: #ffffff;
+      --off: #f4f6fa;
+      --border: #e8ecf4;
+      --muted: #6b7c9e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--off); color: var(--navy); line-height: 1.6; }
+
+    .hero {
+      background: var(--navy);
+      color: white;
+      padding: 44px 40px 38px;
+      text-align: center;
+    }
+    .hero .logo { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+    .hero h1 { font-size: 2.1rem; font-weight: 900; line-height: 1.2; }
+    .hero h1 span { color: var(--green); }
+    .hero p { margin-top: 10px; font-size: 0.98rem; color: rgba(255,255,255,0.6); max-width: 500px; margin-left: auto; margin-right: auto; }
+
+    .steps-nav {
+      display: flex;
+      justify-content: center;
+      background: white;
+      border-bottom: 2px solid var(--border);
+      overflow-x: auto;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(42,57,99,0.08);
+    }
+    .steps-nav a {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 13px 18px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .steps-nav a:hover { color: var(--navy); border-bottom-color: var(--green); }
+    .steps-nav a .num {
+      background: var(--border);
+      color: var(--muted);
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 900;
+      transition: all 0.2s;
+    }
+    .steps-nav a:hover .num { background: var(--green); color: var(--navy); }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 40px 24px 60px; }
+
+    .section { margin-bottom: 44px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-num {
+      background: var(--navy);
+      color: var(--green);
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    .section-header h2 { font-size: 1.25rem; font-weight: 900; color: var(--navy); }
+    .section-header .sub { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+
+    .card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(42,57,99,0.05);
+    }
+    .card h3 {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card h3 .icon {
+      background: rgba(176,202,96,0.15);
+      color: var(--green-dark);
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .card p { color: #444; font-size: 0.9rem; }
+
+    .steps-list { display: flex; flex-direction: column; gap: 10px; }
+    .step-item { display: flex; gap: 14px; align-items: flex-start; }
+    .step-badge {
+      background: var(--navy);
+      color: white;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-content strong { display: block; font-weight: 700; font-size: 0.9rem; color: var(--navy); }
+    .step-content span { font-size: 0.84rem; color: #555; }
+
+    .tip {
+      background: rgba(176,202,96,0.12);
+      border-left: 4px solid var(--green);
+      border-radius: 0 8px 8px 0;
+      padding: 11px 16px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #444;
+    }
+    .tip strong { color: var(--green-dark); }
+
+    .warn {
+      background: rgba(224,80,80,0.08);
+      border-left: 4px solid #e05050;
+      border-radius: 0 8px 8px 0;
+      padding: 11px 16px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #444;
+    }
+    .warn strong { color: #c03030; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } .types-grid { grid-template-columns: 1fr 1fr; } }
+
+    .types-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .type-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+    }
+    .type-card .emoji { font-size: 1.5rem; }
+    .type-card h4 { font-size: 0.85rem; font-weight: 900; color: var(--navy); }
+
+    .faq-item {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 8px;
+    }
+    .faq-item h4 { font-size: 0.9rem; font-weight: 900; color: var(--navy); margin-bottom: 5px; }
+    .faq-item p { font-size: 0.84rem; color: #555; }
+
+    .highlight {
+      background: var(--navy);
+      color: white;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 12px;
+    }
+    .highlight h3 { color: var(--green); font-size: 0.95rem; font-weight: 900; margin-bottom: 6px; }
+    .highlight p { font-size: 0.88rem; color: rgba(255,255,255,0.8); }
+
+    /* Mock */
+    .mock { background: var(--navy); border-radius: 10px; padding: 12px; margin-top: 14px; }
+    .mock-bar { background: rgba(255,255,255,0.08); border-radius: 6px; padding: 7px 12px; display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .mock-bar span { color: rgba(255,255,255,0.4); font-size: 0.72rem; font-family: monospace; }
+    .mock-sidebar { display: flex; gap: 10px; }
+    .mock-sidebar-inner { width: 120px; background: rgba(0,0,0,0.25); border-radius: 6px; padding: 10px; flex-shrink: 0; }
+    .mock-sidebar-inner .m-logo { color: var(--green); font-weight: 900; font-size: 0.68rem; margin-bottom: 8px; }
+    .mock-nav-item { background: rgba(255,255,255,0.07); border-radius: 4px; padding: 4px 8px; font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+    .mock-nav-item.active { background: var(--green); color: var(--navy); font-weight: 700; }
+    .mock-main { flex: 1; }
+    .mock-form-card { background: white; border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+    .mock-form-header { background: var(--navy); color: white; font-size: 0.65rem; font-weight: 700; padding: 4px 10px; }
+    .mock-form-body { padding: 7px 10px; }
+    .mock-chip { display: inline-block; background: #e8ecf4; border-radius: 4px; font-size: 0.6rem; padding: 2px 6px; margin: 2px; color: var(--navy); }
+    .mock-chip.checked { background: var(--navy); color: white; }
+
+    .footer { background: var(--navy); color: rgba(255,255,255,0.5); text-align: center; padding: 22px 20px; font-size: 0.8rem; }
+    .footer strong { color: var(--green); }
+
+    /* Inline faq grid */
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    @media (max-width: 600px) { .faq-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="logo">SOS Fuite d'Eau — Plateforme interne</div>
+  <h1>Guide d'utilisation<br/><span>pour les gestionnaires</span></h1>
+  <p>Remplir, enregistrer et exporter un questionnaire d'intervention en quelques clics.</p>
+</div>
+
+<!-- NAV -->
+<nav class="steps-nav">
+  <a href="#acces"><span class="num">1</span> Accès</a>
+  <a href="#questionnaire"><span class="num">2</span> Questionnaire</a>
+  <a href="#enregistrer"><span class="num">3</span> Enregistrer & Liste</a>
+  <a href="#pdf"><span class="num">4</span> PDF & FAQ</a>
+</nav>
+
+<div class="container">
+
+  <!-- ── 1. ACCÈS ── -->
+  <div class="section" id="acces">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div>
+        <h2>Accéder à la plateforme</h2>
+        <div class="sub">Depuis n'importe quel appareil connecté à internet</div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <h3>🔗 Comment accéder ?</h3>
+      <p>Ouvrez le lien fourni par le responsable dans votre navigateur (Chrome, Safari, Firefox, Edge). Aucune installation ni compte requis — le formulaire s'ouvre directement.</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3><span class="icon">💻</span> Sur ordinateur</h3>
+        <p>Collez le lien dans la barre d'adresse. La sidebar de navigation est à gauche, le formulaire à droite.</p>
+      </div>
+      <div class="card">
+        <h3><span class="icon">📱</span> Sur téléphone</h3>
+        <p>Le site s'adapte aux petits écrans. Appuyez sur <strong>☰</strong> en haut à gauche pour ouvrir le menu.</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>💡 Conseil :</strong> Ajoutez le lien en favori pour y accéder rapidement depuis le terrain.
+    </div>
+  </div>
+
+  <!-- ── 2. QUESTIONNAIRE ── -->
+  <div class="section" id="questionnaire">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div>
+        <h2>Remplir un questionnaire</h2>
+        <div class="sub">L'interface s'ouvre directement sur le formulaire</div>
+      </div>
+    </div>
+
+        <div class="warn" style="margin-top:12px">
+      <strong>⚠️ Types d'intervention :</strong>
+      <div class="types-grid" style="margin-top:10px">
+        <div class="type-card"><div class="emoji"></div><h4>Intérieur</h4></div>
+        <div class="type-card"><div class="emoji"></div><h4>Piscine</h4></div>
+        <div class="type-card"><div class="emoji"></div><h4>Toiture</h4></div>
+        <div class="type-card"><div class="emoji"></div><h4>Extérieur</h4></div>
+      </div>
+      <div style="margin-top:10px">Sélectionnez le bon type <strong>avant</strong> de commencer. Changer de type en cours de route réinitialise les champs déjà cochés.</div>
+    </div>
+
+    <div class="mock">
+      <div class="mock-bar"><span>🔒 votre-lien-plateforme.com</span></div>
+      <div class="mock-sidebar">
+        <div class="mock-sidebar-inner">
+          <div class="m-logo">SOS Fuite d'Eau</div>
+          <div class="mock-nav-item active">✦ Nouveau</div>
+          <div class="mock-nav-item">≡ Liste</div>
+        </div>
+        <div class="mock-main">
+          <div class="mock-form-card">
+            <div class="mock-form-header">Informations générales</div>
+            <div class="mock-form-body" style="display:flex;gap:6px;align-items:center">
+              <span style="font-size:0.65rem;color:#888">N° Dossier :</span>
+              <span style="background:#e8ecf4;border-radius:3px;padding:2px 10px;font-size:0.65rem">3256</span>
+            </div>
+          </div>
+          <div class="mock-form-card">
+            <div class="mock-form-header">1️⃣ Origine du sinistre</div>
+            <div class="mock-form-body">
+              <div style="font-size:0.6rem;color:#888;margin-bottom:3px">Ancienneté :</div>
+              <span class="mock-chip">&lt;24h</span>
+              <span class="mock-chip checked">2–7j</span>
+              <span class="mock-chip">&gt;7j</span>
+              <span class="mock-chip">Inconnue</span>
+            </div>
+          </div>
+          <div style="text-align:right;margin-top:5px">
+            <span style="background:#b0ca60;color:#2a3963;font-size:0.65rem;font-weight:700;padding:4px 12px;border-radius:4px">✦ Enregistrer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3><span class="icon">📋</span> Étapes de remplissage</h3>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-badge">1</div>
+          <div class="step-content">
+            <strong>Saisissez le numéro de dossier</strong>
+            <span>Champ obligatoire — sans lui, l'enregistrement est bloqué.</span>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-badge">2</div>
+          <div class="step-content">
+            <strong>Choisissez le type d'intervention</strong>
+            <span>Un des 4 boutons : Intérieur, Piscine, Toiture ou Extérieur. Le formulaire s'adapte automatiquement.</span>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-badge">3</div>
+          <div class="step-content">
+            <strong>Cochez les réponses & renseignez les champs</strong>
+            <span>Parcourez les sections. Les cases cochées apparaissent en bleu marine. Saisissez noms, téléphones et observations dans les champs texte.</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3><span class="icon">✏️</span> Champ "Autre"</h3>
+          <p>
+            Lorsque vous cochez une option <strong>"Autre"</strong>, un champ de saisie apparaît automatiquement.
+            <br/><br/>
+            👉 Vous devez alors <strong>préciser la situation</strong> en renseignant les informations demandées dans ce champ.
+          </p>
+        </div>
+        <div class="step-item">
+          <div class="step-badge">4</div>
+          <div class="step-content">
+            <strong>Cliquez sur "✦ Enregistrer le questionnaire"</strong>
+            <span>Bouton vert en bas de page. Seules les infos connues au moment de l'appel sont nécessaires.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. ENREGISTRER & LISTE ── -->
+  <div class="section" id="enregistrer">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div>
+        <h2>Enregistrer & Consulter la liste</h2>
+        <div class="sub">Sauvegarde en temps réel, accessible par tous les gestionnaires</div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3><span class="icon">✅</span> Enregistrement réussi</h3>
+        <p>Message vert en bas à droite : <em>"Questionnaire enregistré !"</em>. Le formulaire se vide et est prêt pour le suivant.</p>
+      </div>
+      <div class="card">
+        <h3><span class="icon">❌</span> Erreur d'enregistrement</h3>
+        <p>Message rouge. Vérifiez que le numéro de dossier est bien renseigné et que vous êtes connecté à internet.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="icon">🗑️</span> Bouton "Effacer"</h3>
+      <p>Remet tous les champs à zéro sans enregistrer. Une confirmation est demandée avant l'effacement.</p>
+    </div>
+
+    <div class="tip">
+      <strong>💡 Temps réel :</strong> Tous les gestionnaires voient les mêmes questionnaires instantanément.
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <h3><span class="icon">≡</span> Accéder à la liste & rechercher</h3>
+      <p style="margin-bottom:10px">Cliquez sur <strong>Tous les questionnaires</strong> dans la sidebar. Le tableau affiche tous les dossiers du plus récent au plus ancien.</p>
+      <div class="grid2">
+        <div>
+          <strong style="font-size:0.85rem;color:var(--navy);">🔍 Recherche</strong>
+          <p style="margin-top:4px">Tapez un numéro de dossier, un nom ou un téléphone — les résultats se filtrent instantanément.</p>
+        </div>
+        <div>
+          <strong style="font-size:0.85rem;color:var(--navy);">🏷️ Filtre par type</strong>
+          <p style="margin-top:4px">Boutons <em>Intérieur, Piscine, Toiture, Extérieur</em> pour n'afficher qu'un seul type d'intervention.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. PDF & FAQ ── -->
+  <div class="section" id="pdf">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div>
+        <h2>Exporter en PDF & Questions fréquentes</h2>
+        <div class="sub">Générer un document imprimable · Résoudre les problèmes courants</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="icon">⬇️</span> Générer le PDF</h3>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-badge">1</div>
+          <div class="step-content"><strong>Allez dans "Tous les questionnaires"</strong></div>
+        </div>
+        <div class="step-item">
+          <div class="step-badge">2</div>
+          <div class="step-content"><strong>Trouvez le dossier</strong><span>Via la recherche ou le filtre.</span></div>
+        </div>
+        <div class="step-item">
+          <div class="step-badge">3</div>
+          <div class="step-content"><strong>Cliquez sur "⬇ PDF"</strong><span>Bouton dans la colonne Actions à droite de la ligne.</span></div>
+        </div>
+        <div class="step-item">
+          <div class="step-badge">4</div>
+          <div class="step-content"><strong>Sélectionnez "Enregistrer en PDF"</strong><span>Dans la boîte d'impression. Sur iOS : Options → Enregistrer en PDF. Sur Android : choisissez "Enregistrer en PDF" dans les imprimantes.</span></div>
+        </div>
+      </div>
+      <div class="warn" style="margin-top:10px">
+        <strong>⚠️ Popups bloqués ?</strong> Si rien ne s'ouvre, autorisez les popups pour ce site dans les paramètres de votre navigateur.
+      </div>
+    </div>
+
+    <div class="faq-grid" style="margin-top:14px">
+      <div class="faq-item">
+        <h4>🔴 "Enregistrer" ne fonctionne pas</h4>
+        <p>Vérifiez que le <strong>Numéro de dossier</strong> est rempli (seul champ obligatoire), puis vérifiez votre connexion et rechargez.</p>
+      </div>
+      <div class="faq-item">
+        <h4>🔴 Questionnaire enregistré avec une erreur</h4>
+        <p>Dans <strong>Tous les questionnaires</strong>, supprimez le dossier avec <strong>✕</strong> (définitif, confirmation demandée), puis recommencez.</p>
+      </div>
+      <div class="faq-item">
+        <h4>🔴 Affichage incorrect sur téléphone</h4>
+        <p>Utilisez Chrome ou Safari. Appuyez en dehors de la sidebar pour la fermer. Tournez en mode paysage pour plus de confort.</p>
+      </div>
+      <div class="faq-item">
+        <h4>🔴 Je ne vois pas le questionnaire d'un collègue</h4>
+        <p>Rechargez la page dans <strong>Tous les questionnaires</strong>. Les données sont partagées en temps réel.</p>
+      </div>
+      <div class="faq-item">
+        <h4>🟢 Faut-il créer un compte ?</h4>
+        <p>Non. La plateforme est accessible directement via le lien — aucun identifiant ni mot de passe.</p>
+      </div>
+      <div class="faq-item">
+        <h4>🟢 Les données sont-elles sauvegardées si je ferme ?</h4>
+        <p>Oui, à condition d'avoir cliqué sur <strong>Enregistrer</strong> avant. Sans enregistrement, les données saisies sont perdues.</p>
+      </div>
+      <div class="faq-item">
+        <h4>🟢 Peut-on utiliser la plateforme hors connexion ?</h4>
+        <p>Le formulaire se remplit hors connexion, mais l'enregistrement et la consultation de la liste nécessitent internet.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>SOS Fuite d'Eau</strong>
+</div>
+
+</body>
+</html>
